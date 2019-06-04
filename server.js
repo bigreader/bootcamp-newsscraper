@@ -13,7 +13,7 @@ app.use('/', require('./routes/main'));
 app.use('/api', require('./routes/api'));
 
 app.get('/test', function(req, res) {
-	res.send('test', {
+	res.json('test', {
 		connected: db.connected,
 		port: PORT,
 		mongo: process.env.MONGODB_URI || '(undefined)'
