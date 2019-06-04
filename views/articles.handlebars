@@ -1,18 +1,14 @@
-<div class="container">
-  <div class="row">
-
-    <div class="col-12 col-md-6">
-      {{#each articles}}
-        <div class="card mb-3">
-          <img src="{{img}}" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">{{title}}</h5>
-            {{#if author}}<h6 class="card-subtitle mb-2 text-muted">by {{author}}</h6>{{/if}}
-            <a href="/{{id}}" class="card-link" >Comment</a>
-          </div>
+<div class="row">
+  <div class="col-12 col-md-6">
+    {{#each articles}}
+      <div class="card mb-3">
+        <img src="{{img}}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          {{#if author}}<h6 class="card-subtitle mb-2 text-muted">by {{author}}</h6>{{/if}}
+          <a href="/{{id}}" class="card-link" >Comment</a>
         </div>
-      {{/each}}
-    </div>
-
+      </div>
+    {{/each}}
   </div>
 </div>

@@ -37,8 +37,6 @@ router.get('/articles/:article/comments', function (req, res) {
 });
 
 router.post('/articles/:article/comments', function (req, res) {
-  db.Comment.create(req.body, handle(res, 201));
-
   db.Article.findById(req.params.article, (err, article) => {
     if (err) return res.status(500).json({error: err});
     if (!article) return res.status(404).end();

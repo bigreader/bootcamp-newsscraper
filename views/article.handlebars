@@ -1,0 +1,54 @@
+<div class="row">
+
+  <article class="col-12 col-md-8">
+    {{#if img}}<img src="{{img}}" class="img-fluid">{{/if}}
+
+    <h1>{{title}}</h1>
+    {{#if author}}<p class="mb-2 text-muted">by {{author}}</p>{{/if}}
+
+    {{{body}}}
+
+  </article>
+
+  <div class="col-12 col-md-4">
+    <h1>Comments</h1>
+    <div id="comment-list">
+      {{#each comments}}
+      <div class="card">
+        <div class="card-body">
+          {{body}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    
+    <form>
+      <div class="form-group">
+        <textarea class="form-control" id="comment-field" rows="3" placeholder="Post a comment..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+  </div>
+
+</div>
+
+<script>
+  $(function() {
+    $('form').submit(function(event) {
+      event.preventDefault();
+      let text = $('#comment-field').val();
+      $('#comment-field').val('');
+
+      $.post('/api/articles/{{id}}/comments', {
+        body: text,
+        date: Date.now()
+      });
+      $('#comment-list').append($(`
+      <div class="card">
+        <div class="card-body">
+        ${text}
+        </div>
+      </div>`));
+    });
+  });
+</script>

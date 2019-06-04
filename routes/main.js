@@ -23,18 +23,12 @@ router.get('/', (req, res) => {
       doc.date = moment(dateString.replace(/P.T/, '-7:00'), 'dddd MMMM D, YYYY h:mm a Z');
 
       var content = $('.content .content_inner', this);
-      doc.body = content.text();
       doc.img = content.find('noscript img').attr('src');
+      doc.body = content.text().replace(/\\n/g, '<br>');
 
       db.Article.updateOne({
         link: $('.title a', this).attr('href')
-      }, {
-        title: $('.title a', this).text(),
-        link: $('.title a', this).attr('href'),
-        author: $('.byline a', this).text(),
-        body: $('.content_inner', this).text(),
-        img: $('.content noscript img').first().attr('src')
-      }, {
+      }, doc, {
         upsert: true
       }).exec();
     });
