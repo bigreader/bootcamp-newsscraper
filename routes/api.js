@@ -1,5 +1,8 @@
+var axios   = require('axios');
+var cheerio = require('cheerio');
 var express = require('express');
-var db = require('../models');
+var moment  = require('moment');
+var db      = require('../models');
 
 var router = express.Router();
 router.use(express.urlencoded({ extended: true }));
@@ -14,7 +17,9 @@ function handle(res, status) {
 }
 
 router.get('/articles', function (req, res) {
-  db.Article.find(handle(res));
+  db.Article.find().sort({
+    date: -1
+  }).exec(handle(res));
 });
 
 
